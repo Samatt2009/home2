@@ -19,13 +19,13 @@ class _OnboardingViewState extends State<OnboardingView> {
           'Chat with the smartest AI Future\nExperience power of AI with us'
     },
     {
-      'image': 'assets/images/Robot Image (1).png',
+      'image': 'assets/images/Robot (2).png',
       'title': '   Chat With Your\n Favourite Ai',
       'subtitle':
           'Chat with the smartest AI Future\nExperience power of AI with us'
     },
     {
-      'image': 'assets/images/Robot Image (1).png',
+      'image': 'assets/images/Robo (3).png',
       'title': 'Boost Your Mind\n Power with Ai',
       'subtitle':
           'Chat with the smartest AI Future\nExperience power of AI with us'
@@ -35,7 +35,7 @@ class _OnboardingViewState extends State<OnboardingView> {
   void _nextpage() {
     if (_currentIndex < pages.length - 1) {
       _pageController.nextPage(
-        duration: Duration(microseconds: 300),
+        duration: Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
     }
@@ -67,6 +67,44 @@ class _OnboardingViewState extends State<OnboardingView> {
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
+              ),
+            ),
+            Expanded(
+              child: PageView.builder(
+                controller: _pageController,
+                itemCount: pages.length,
+                onPageChanged: (index) {
+                  setState(() {
+                    _currentIndex = index;
+                  });
+                },
+                itemBuilder: (context, index) {
+                  final page = pages[index];
+                  return Column(
+                    children: [
+                      Image.asset(
+                        page['image']!,
+                      ),
+                      SizedBox(height: 24),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: List.generate(
+                          page.length,
+                          (i) => Container(
+                            height: 8,
+                            width: 8,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: _currentIndex == index
+                                  ? Color(0xffffffff)
+                                  : Colors.grey,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                },
               ),
             ),
           ],
